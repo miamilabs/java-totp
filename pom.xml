@@ -14,7 +14,7 @@
    <name>${project.groupId}:${project.artifactId}</name>
    <description>A library to help implement time-based one time passwords to enable MFA.</description>
 
-  <url>https://github.com/samdjstevens/java-totp</url>
+  <url>https://github.com/miamilabs/java-totp</url>
 
   <developers>
     <developer>
