@@ -8,6 +8,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static dev.samstevens.totp.IOUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -28,7 +32,7 @@ public class ZxingPngQrGeneratorTest {
                 .period(30)
                 .build();
 
-        writeFile(generator.generate(data), "./test_qr.png");
+        Files.write(Paths.get("./test_qr.png"), generator.generate(data));
     }
 
     @Test
@@ -40,20 +44,18 @@ public class ZxingPngQrGeneratorTest {
     public void testImageSize() throws QrGenerationException, IOException {
         ZxingPngQrGenerator generator = new ZxingPngQrGenerator();
         generator.setImageSize(500);
+
         byte[] data = generator.generate(getData());
-
-        // Write the data to a temp file and read it into a BufferedImage to get the dimensions
-        String filename = "/tmp/test_qr.png";
-        writeFile(data, filename);
-        File file = new File(filename);
-        BufferedImage image = ImageIO.read(file);
-
-        assertEquals(500, generator.getImageSize());
-        assertEquals(500, image.getWidth());
-        assertEquals(500, image.getHeight());
-
-        // Delete the temp file
-        file.delete();
+        final Path filepath = Files.createTempFile("test_qr", ".png");
+        try {
+            Files.write(filepath, data);
+            BufferedImage image = ImageIO.read(filepath.toFile());
+            assertEquals(500, generator.getImageSize());
+            assertEquals(500, image.getWidth());
+            assertEquals(500, image.getHeight());
+        } finally {
+            filepath.toFile().delete();
+        }
     }
 
     @Test

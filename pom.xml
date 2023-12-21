@@ -4,7 +4,7 @@
   <groupId>dev.samstevens.totp</groupId>
   <artifactId>totp-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.7.1</version>
+  <version>1.7.2</version>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
@@ -25,9 +25,9 @@
   </developers>
 
   <scm>
-    <developerConnection>scm:git:git@github.com:samdjstevens/java-totp.git</developerConnection>
-    <tag>totp-1.7.1</tag>
-    <url>https://github.com/samdjstevens/java-totp</url>
+    <developerConnection>scm:git:git@github.com:miamilabs/java-totp.git</developerConnection>
+    <tag>totp-1.7.2</tag>
+    <url>https://github.com/miamilabs/java-totp</url>
   </scm>
 
   <licenses>
